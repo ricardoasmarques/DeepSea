@@ -7,7 +7,7 @@ The [diagram](deepsea.png) should explain the intended flow for the orchestratio
 
 ## Status
 Automatic discovery, configuration and deployment of Ceph clusters works. RGW
-deployment is currently broken. MDS deployment and CephFS creation works.
+deployment works for single site deployements. MDS deployment and CephFS creation works.
 
 ## Get Involved
 To learn more about DeepSea, take a look at the [Wiki](https://github.com/SUSE/DeepSea/wiki).
@@ -18,7 +18,7 @@ feedback, please join us there! We look forward to your contribution.
 
 If you think you've found a bug or would like to suggest an enhancement, please submit it via the [bug tracker](https://github.com/SUSE/DeepSea/issues/new) on GitHub.
 
-For contributing to the DeepSea, refer to the [contribution gudelines](https://github.com/suse/deepsea/blob/contributing.md)
+For contributing to DeepSea, refer to the [contribution guidelines](https://github.com/suse/deepsea/blob/master/contributing.md)
 
 ## Usage
 ### Prepare Salt

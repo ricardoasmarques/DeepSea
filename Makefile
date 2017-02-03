@@ -178,6 +178,9 @@ install:
 	install -m 644 srv/salt/ceph/rbd/benchmarks/*.sls $(DESTDIR)/srv/salt/ceph/rbd/benchmarks/
 	install -d -m 755 $(DESTDIR)/srv/salt/ceph/rbd/benchmarks/files
 	install -m 644 srv/salt/ceph/rbd/benchmarks/files/keyring.j2 $(DESTDIR)/srv/salt/ceph/rbd/benchmarks/files/
+	# state files - purge
+	install -d -m 755 $(DESTDIR)/srv/salt/ceph/purge
+	install -m 644 srv/salt/ceph/purge/*.sls $(DESTDIR)/srv/salt/ceph/purge/
 	# state files - reactor
 	install -d -m 755 $(DESTDIR)/srv/salt/ceph/reactor
 	install -m 644 srv/salt/ceph/reactor/*.sls $(DESTDIR)/srv/salt/ceph/reactor/
@@ -215,6 +218,8 @@ install:
 	install -m 644 srv/salt/ceph/rescind/master/*.sls $(DESTDIR)/srv/salt/ceph/rescind/master/
 	install -d -m 755 $(DESTDIR)/srv/salt/ceph/rescind/client-cephfs
 	install -m 644 srv/salt/ceph/rescind/client-cephfs/*.sls $(DESTDIR)/srv/salt/ceph/rescind/client-cephfs/
+	install -d -m 755 $(DESTDIR)/srv/salt/ceph/rescind/client-nfs
+	install -m 644 srv/salt/ceph/rescind/client-nfs/*.sls $(DESTDIR)/srv/salt/ceph/rescind/client-nfs/
 	install -d -m 755 $(DESTDIR)/srv/salt/ceph/rescind/mds-nfs
 	install -m 644 srv/salt/ceph/rescind/mds-nfs/*.sls $(DESTDIR)/srv/salt/ceph/rescind/mds-nfs/
 	install -d -m 755 $(DESTDIR)/srv/salt/ceph/rescind/mds
@@ -243,6 +248,9 @@ install:
 	# state files - restart
 	install -d -m 755 $(DESTDIR)/srv/salt/ceph/restart
 	install -m 644 srv/salt/ceph/restart/*.sls $(DESTDIR)/srv/salt/ceph/restart/
+	# state files - reset
+	install -d -m 755 $(DESTDIR)/srv/salt/ceph/reset
+	install -m 644 srv/salt/ceph/reset/*.sls $(DESTDIR)/srv/salt/ceph/reset/
 	# state files - rgw
 	install -d -m 755 $(DESTDIR)/srv/salt/ceph/rgw
 	install -m 644 srv/salt/ceph/rgw/*.sls $(DESTDIR)/srv/salt/ceph/rgw/
@@ -313,10 +321,12 @@ install:
 rpm: tarball
 	rpmbuild -bb deepsea.spec
 
-tarball: tests
+# Removing test dependency until resolved
+tarball: 
 	VERSION=`awk '/^Version/ {print $$2}' deepsea.spec`; \
 	git archive --prefix deepsea-$$VERSION/ -o ~/rpmbuild/SOURCES/deepsea-$$VERSION.tar.gz HEAD
 
-tests:
-	@echo "Need to write tests :)"
+test:
+	tox
+
 

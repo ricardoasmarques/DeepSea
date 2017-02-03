@@ -19,7 +19,7 @@
 # See also http://en.opensuse.org/openSUSE:Shared_library_packaging_policy
 
 Name:           deepsea
-Version:        0.7
+Version:        0.7.2
 Release:        0
 Summary:        Salt solution for deploying and managing Ceph
 
@@ -31,6 +31,7 @@ Source0:        deepsea-%{version}.tar.gz
 BuildRequires:  salt-master
 Requires:       salt-master
 Requires:       salt-minion
+Requires:       python-ipaddress
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
@@ -124,6 +125,7 @@ systemctl try-restart salt-master > /dev/null 2>&1 || :
 %dir /srv/salt/ceph/rbd
 %dir /srv/salt/ceph/rbd/benchmarks
 %dir /srv/salt/ceph/rbd/benchmarks/files
+%dir /srv/salt/ceph/purge
 %dir /srv/salt/ceph/reactor
 %dir /srv/salt/ceph/refresh
 %dir /srv/salt/ceph/repo
@@ -134,10 +136,12 @@ systemctl try-restart salt-master > /dev/null 2>&1 || :
 %dir /srv/salt/ceph/remove/mds
 %dir /srv/salt/ceph/remove/rgw
 %dir /srv/salt/ceph/remove/storage
+%dir /srv/salt/ceph/reset
 %dir /srv/salt/ceph/rescind
 %dir /srv/salt/ceph/rescind/admin
 %dir /srv/salt/ceph/rescind/client-cephfs
 %dir /srv/salt/ceph/rescind/client-iscsi
+%dir /srv/salt/ceph/rescind/client-nfs
 %dir /srv/salt/ceph/rescind/client-radosgw
 %dir /srv/salt/ceph/rescind/igw
 %dir /srv/salt/ceph/rescind/igw/keyring
@@ -255,6 +259,7 @@ systemctl try-restart salt-master > /dev/null 2>&1 || :
 %config /srv/salt/ceph/pool/*.sls
 %config /srv/salt/ceph/rbd/benchmarks/*.sls
 %config /srv/salt/ceph/rbd/benchmarks/files/keyring.j2
+%config /srv/salt/ceph/purge/*.sls
 %config /srv/salt/ceph/reactor/*.sls
 %config /srv/salt/ceph/refresh/*.sls
 %config /srv/salt/ceph/repo/*.sls
@@ -267,6 +272,7 @@ systemctl try-restart salt-master > /dev/null 2>&1 || :
 %config /srv/salt/ceph/rescind/admin/*.sls
 %config /srv/salt/ceph/rescind/client-iscsi/*.sls
 %config /srv/salt/ceph/rescind/client-cephfs/*.sls
+%config /srv/salt/ceph/rescind/client-nfs/*.sls
 %config /srv/salt/ceph/rescind/client-radosgw/*.sls
 %config /srv/salt/ceph/rescind/igw/*.sls
 %config /srv/salt/ceph/rescind/igw/keyring/*.sls
@@ -282,6 +288,7 @@ systemctl try-restart salt-master > /dev/null 2>&1 || :
 %config /srv/salt/ceph/rescind/rgw/keyring/*.sls
 %config /srv/salt/ceph/rescind/storage/*.sls
 %config /srv/salt/ceph/rescind/storage/keyring/*.sls
+%config /srv/salt/ceph/reset/*.sls
 %config /srv/salt/ceph/restart/*.sls
 %config /srv/salt/ceph/rgw/*.sls
 %config /srv/salt/ceph/rgw/files/*.j2

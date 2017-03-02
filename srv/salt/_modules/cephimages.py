@@ -9,7 +9,7 @@ from subprocess import Popen, PIPE
 
 def list():
     """
-    Find all rbd images 
+    Find all rbd images
     """
     images = {}
     proc = Popen([ 'rados', 'lspools' ], stdout=PIPE, stderr=PIPE)
